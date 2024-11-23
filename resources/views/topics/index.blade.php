@@ -4,15 +4,8 @@
 
 @section('content')
 
-<div class="search-form mb-5">
-  <form action="#" method="get">
-    <div class="input-group"> <input type="text" placeholder="入力して検索できる" name="search" class="form-control input-lg">
-      {{-- <div class="input-group-btn">
-        <button class="btn btn-lg btn-primary" type="submit"> Search </button>
-      </div> --}}
-    </div>
-  </form>
-</div>
+@livewire('search')
+
 <div class="row mb-5">
   <div class="col-lg-9 col-md-9 topic-list">
 
@@ -24,7 +17,7 @@
 
     <div class="card ">
 
-      <div class="card-header bg-transparent">
+      {{-- <div class="card-header bg-transparent">
         <ul class="nav nav-pills">
           <li class="nav-item">
             <a class="nav-link {{ active_class( ! if_query('order', 'recent')) }}"
@@ -39,7 +32,7 @@
             </a>
           </li>
         </ul>
-      </div>
+      </div> --}}
 
       <div class="card-body">
         {{-- 话题列表 --}}

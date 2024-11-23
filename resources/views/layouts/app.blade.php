@@ -17,6 +17,7 @@
   <link href="{{ mix('css/app.css') }}" rel="stylesheet">
 
   @yield('styles')
+  @livewireStyles
 
 </head>
 
@@ -42,6 +43,7 @@
 
   <!-- Scripts -->
   <script src="{{ mix('js/app.js') }}"></script>
+  @livewireScripts
 
   @yield('scripts')
 
