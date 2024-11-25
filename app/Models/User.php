@@ -7,17 +7,18 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
-use Illuminate\Auth\MustVerifyEmail as MustVerifyEmailTrait;
+// use Illuminate\Auth\MustVerifyEmail as MustVerifyEmailTrait;
 use Illuminate\Support\Facades\Auth;
 use Spatie\Permission\Traits\HasRoles;
 use Illuminate\Support\Str;
 
-class User extends Authenticatable implements MustVerifyEmail
+class User extends Authenticatable
+// implements MustVerifyEmail
 {
-    use Traits\LastActivedAtHelper;
+    // use Traits\LastActivedAtHelper;
     use Traits\ActiveUserHelper;
     use HasRoles;
-    use HasApiTokens, HasFactory, MustVerifyEmailTrait;
+    use HasApiTokens, HasFactory;
 
     use Notifiable {
         notify as protected laravelNotify;
@@ -92,7 +93,7 @@ class User extends Authenticatable implements MustVerifyEmail
     public function setAvatarAttribute($path)
     {
         // 如果不是 `http` 子串开头，那就是从后台上传的，需要补全 URL
-        if ( ! Str::startsWith($path, 'http')) {
+        if (! Str::startsWith($path, 'http')) {
 
             // 拼接完整的 URL
             $path = config('app.url') . "/uploads/images/avatars/$path";

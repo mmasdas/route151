@@ -3,6 +3,7 @@
 namespace App\Http\Middleware;
 
 use Illuminate\Auth\Middleware\Authenticate as Middleware;
+// use RealRashid\SweetAlert\Facades\Alert;
 
 class Authenticate extends Middleware
 {
@@ -14,6 +15,10 @@ class Authenticate extends Middleware
      */
     protected function redirectTo($request)
     {
+        // Alert::warning('Warning', 'You Must Login');
+
+        toast('You Must Login', 'warning');
+
         if (! $request->expectsJson()) {
             return route('login');
         }

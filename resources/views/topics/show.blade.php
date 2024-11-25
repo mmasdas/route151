@@ -63,11 +63,23 @@
       </div>
     </div>
 
-    {{-- 用户回复列表 --}}
     <div class="card topic-reply mt-4">
       <div class="card-body">
-        @includeWhen(Auth::check(), 'topics._reply_box', ['topic' => $topic])
-        @include('topics._reply_list', ['replies' => $topic->replies()->with('user')->paginate(5)])
+        @guest
+        <div class="list-group mb-5 shadow">
+          <div class="list-group-item">
+            <div class="row align-items-center">
+              <div class="col"> <strong class="mb-0">Review after registration </strong>
+                <p class="text-muted mb-0"><a href="{{ route('login') }}" style="color: cornflowerblue">login page
+                  </a></p>
+              </div>
+            </div>
+          </div>
+        </div>
+        @else
+        @include('topics._reply_box', ['topic' => $topic])
+        @endguest
+        @include('topics._reply_list', ['replies' => $topic->replies()->with('user')->latest()->paginate(5)])
       </div>
     </div>
 

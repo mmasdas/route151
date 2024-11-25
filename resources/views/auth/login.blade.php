@@ -37,13 +37,14 @@
                                             class="form-control @error('password') is-invalid @enderror" name="password"
                                             required autocomplete="current-password">
                                     </div>
-                                    <button type="submit" class="btn btn-theme">{{ __('Login') }}</button>
-                                    @if (Route::has('password.request'))
+                                    <button type="submit" class="btn btn-theme"
+                                        style="background-color: #5369f8; color:aliceblue;">{{ __('Login') }}</button>
+                                    {{-- @if (Route::has('password.request'))
                                     <a class="forgot-link float-right text-primary"
                                         href="{{ route('password.request') }}">
                                         {{ __('Forgot Password') }}
                                     </a>
-                                    @endif
+                                    @endif --}}
                                 </form>
                             </div>
                         </div>

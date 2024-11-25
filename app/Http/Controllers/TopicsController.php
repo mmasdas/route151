@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Handlers\ImageUploadHandler;
 use App\Models\User;
 use App\Models\Link;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class TopicsController extends Controller
 {
@@ -50,8 +51,9 @@ class TopicsController extends Controller
     {
         $topic->fill($request->all());
         $topic->user_id = Auth::id();
-        $topic->save();
+        $topic->save(); 
 
+        toast('Create Successful!','success');
         return redirect($topic->link())->with('success', '帖子创建成功！');
     }
 
@@ -67,14 +69,18 @@ class TopicsController extends Controller
         $this->authorize('update', $topic);
         $topic->update($request->all());
 
+        toast('Edit Successful!', 'info');
+
         // dd($topic->link());
-        return redirect($topic->link())->with('success', '更新成功！');
+        return redirect($topic->link());
     }
 
     public function destroy(Topic $topic)
     {
         $this->authorize('destroy', $topic);
         $topic->delete();
+
+        toast('Delete Successful!','error');
 
         return redirect()->route('topics.index')->with('success', '成功删除！');
     }

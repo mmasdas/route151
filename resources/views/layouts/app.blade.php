@@ -28,7 +28,7 @@
 
     <div class="container">
 
-      @include('shared._messages')
+      {{-- @include('shared._messages') --}}
 
       @yield('content')
 
@@ -46,6 +46,7 @@
   @livewireScripts
 
   @yield('scripts')
+  @include('sweetalert::alert')
 
 </body>
 

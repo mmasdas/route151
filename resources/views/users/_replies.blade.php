@@ -19,7 +19,7 @@
 </ul>
 
 @else
-<div class="empty-block">__('Not Have Data') </div>
+<div class="empty-block">{{ __('Not Have Data') }} </div>
 @endif
 
 {{-- 分页 --}}
