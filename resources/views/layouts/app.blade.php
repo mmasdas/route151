@@ -9,7 +9,7 @@
   <!-- CSRF Token -->
   <meta name="csrf-token" content="{{ csrf_token() }}">
 
-  <title>@yield('title', 'LaraBBS') - {{ setting('site_name', '外国人車関係車関係の仕事の雑談') }}</title>
+  <title>@yield('title', '外国人車関係車関係の仕事の雑談') - {{ setting('site_name', '外国人車関係車関係の仕事の雑談') }}</title>
   <meta name="description" content="@yield('description', setting('seo_description', '車、整備、仕事、雑談'))" />
   <meta name="keywords" content="@yield('keyword', setting('seo_keyword', '車、整備、仕事、雑談'))" />
 
