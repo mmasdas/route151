@@ -22,9 +22,16 @@ class TopicsController extends Controller
 
     public function index(Request $request, Topic $topic, User $user, Link $link)
     {
-        $topics = $topic->withOrder($request->order)
-            ->with('user', 'category')  // 预加载防止 N+1 问题
+        $topics = $topic
+            ->withOrder($request->order)
+            ->with([
+                'user',
+                'category',
+            ])
+            ->whereNotIn('category_id', [5,])
             ->paginate(6);
+
+        // dd(11);
         $active_users = $user->getActiveUsers();
         $links = $link->getAllCached();
 
@@ -38,7 +45,17 @@ class TopicsController extends Controller
             return redirect($topic->link(), 301);
         }
 
-        return view('topics.show', compact('topic'));
+        $previousPost = $topic->where('id', '<', $topic->id)
+            ->orderBy('id', 'desc')
+            ->whereIn('category_id', [$topic->category_id])
+            ->first();
+
+        $nextPost = $topic->where('id', '>', $topic->id)
+            ->orderBy('id', 'asc')
+            ->whereIn('category_id', [$topic->category_id])
+            ->first();
+
+        return view('topics.show', compact('topic', 'previousPost', 'nextPost'));
     }
 
     public function create(Topic $topic)
@@ -51,9 +68,9 @@ class TopicsController extends Controller
     {
         $topic->fill($request->all());
         $topic->user_id = Auth::id();
-        $topic->save(); 
+        $topic->save();
 
-        toast('Create Successful!','success');
+        toast('Create Successful!', 'success');
         return redirect($topic->link())->with('success', '帖子创建成功！');
     }
 
@@ -80,7 +97,7 @@ class TopicsController extends Controller
         $this->authorize('destroy', $topic);
         $topic->delete();
 
-        toast('Delete Successful!','error');
+        toast('Delete Successful!', 'error');
 
         return redirect()->route('topics.index')->with('success', '成功删除！');
     }

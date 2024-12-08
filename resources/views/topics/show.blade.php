@@ -43,6 +43,22 @@
           {!! $topic->body !!}
         </div>
 
+        <div class="m-2">
+          <div class="d-flex justify-content-between">
+            @if($previousPost)
+            <a href="{{ route('topics.show', $previousPost) }}">
+              {{ $previousPost->title }}
+            </a>
+            @endif
+            @if($nextPost)
+            <a href="{{ route('topics.show', $nextPost) }}">
+              {{ $nextPost->title }}
+            </a>
+            @endif
+          </div>
+        </div>
+
+
         @can('update', $topic)
         <div class="operate">
           <hr>
@@ -86,3 +102,9 @@
   </div>
 </div>
 @stop
+
+<style>
+  a {
+    font-size: smaller;
+  }
+</style>

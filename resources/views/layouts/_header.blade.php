@@ -12,6 +12,8 @@
             href="{{ route('categories.show', 3) }}">雑談</a></li>
         <li class="nav-item"><a class="nav-link {{ category_nav_active(4) }}"
             href="{{ route('categories.show', 4) }}">電装系</a></li>
+        <li class="nav-item"><a class="nav-link {{ category_nav_active(5) }}"
+            href="{{ route('categories.show', 5) }}">Swift中文</a></li>
       </ul>
     </div>
   </div>
